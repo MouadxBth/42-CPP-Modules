@@ -1,0 +1,15 @@
+#include "MySed.hpp"
+
+integer main(integer argc, char **argv)
+{
+    if (argc != 4)
+    {
+        std::cerr << "Error: Invalid number of arguments."
+                  << std::endl
+                  << "Usage: " << argv[0] << " <filename> <first> <second>"
+                  << std::endl;
+        return (1);
+    }
+
+    return (replaceInFile(argv[1], argv[2], argv[3]), 0);
+}
