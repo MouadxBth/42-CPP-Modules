@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/04/24 12:49:27 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/04/29 23:16:24 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADERS_DIR	:= .
 
 SRCS_DIR	:= .
 
-SOURCES	= Fixed.cpp main.cpp
+SOURCES	= ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp main.cpp
 SOURCES	:= $(addprefix $(SRCS_DIR)/,$(SOURCES))
 
 # Objects/Output files
@@ -54,7 +54,7 @@ endef
 
 CXX	:= c++
 
-CPPFLAGS	:= -Wall -Werror -Wextra -std=c++98 -I$(HEADERS_DIR)/
+CPPFLAGS	:= -Wall -Werror -Wextra -Wshadow -Wno-shadow -std=c++98 -I$(HEADERS_DIR)/
 
 LDFLAGS	:= -fsanitize=address
 
@@ -66,15 +66,14 @@ NAME	= main
 
 define PROJECT_HEADER
 
-___  ___       ______ _          _     _____ _____  ______   _____ _
-|  \/  |       |  ___(_)        | |   |  _  /  __ \ |  ___| /  __ \ |
-| .  . |_   _  | |_   _ _ __ ___| |_  | | | | /  \/ | |_    | /  \/ | __ _ ___ ___
-| |\/| | | | | |  _| | | '__/ __| __| | | | | |     |  _|   | |   | |/ _` / __/ __|
-| |  | | |_| | | |   | | |  \__ \ |_  \ \_/ / \__/\_| |     | \__/\ | (_| \__ \__ \\
-\_|  |_/\__, | \_|   |_|_|  |___/\__|  \___(_)____(_)_|      \____/_|\__,_|___/___/
-         __/ |
-        |___/
-
+______             _____
+|  ___|           |_   _|
+| |_ _ __ __ _  __ _| |_ __ __ _ _ __
+|  _| '__/ _` |/ _` | | '__/ _` | '_ \\
+| | | | | (_| | (_| | | | | (_| | |_) |
+\_| |_|  \__,_|\__, \_/_|  \__,_| .__/
+                __/ |           | |
+               |___/            |_|
 
 endef
 export PROJECT_HEADER

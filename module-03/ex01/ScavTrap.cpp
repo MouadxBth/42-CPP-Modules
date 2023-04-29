@@ -10,10 +10,7 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 
 ScavTrap::ScavTrap(const ScavTrap &ref) : ClapTrap(ref)
 {
-	this->_name = ref._name;
-	this->_hitPoints = ref._hitPoints;
-	this->_energyPoints = ref._energyPoints;
-	this->_attackDamage = ref._attackDamage;
+	*this = ref;
 	std::cout << "The ScavTrap "
 		<< "'" + ref._name + "'"
 		<< " has been cloned."
@@ -52,8 +49,7 @@ ScavTrap::ScavTrap(std::string name)
 
 void	ScavTrap::guardGate(void)
 {
-	if (this->_hitPoints > 0 && this->_energyPoints > 0)
-		std::cout << "The ScavTrap "
+	std::cout << "The ScavTrap "
 		<< "'" + _name + "'"
 		<< " is now in Gate keeper mode."
 		<< std::endl;
