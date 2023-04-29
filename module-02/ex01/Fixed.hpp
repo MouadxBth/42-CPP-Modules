@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <math.h>
 
 class Fixed
 {
@@ -15,7 +16,7 @@ public:
     Fixed(const int);
     Fixed(const float);
     Fixed &operator=(const Fixed&);
-    
+
     ~Fixed(void);
 
     int getRawBits(void) const;

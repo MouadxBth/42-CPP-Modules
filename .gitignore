@@ -1,2 +1,4 @@
 references/
 .vscode/
+*.o
+*.d

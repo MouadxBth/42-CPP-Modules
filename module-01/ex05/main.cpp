@@ -17,6 +17,6 @@ int	main(void)
     std::cout << std::endl;
 
     harl.complain("BLANK");
-    std::cout << std::endl;
+
 	return (0);
 }

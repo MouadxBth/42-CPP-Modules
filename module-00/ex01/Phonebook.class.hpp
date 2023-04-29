@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:24:40 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/04/11 16:28:48 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/04/28 20:52:27 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,22 @@
 #include "Contact.class.hpp"
 #include "Utilities.hpp"
 
-
 class Phonebook
 {
-
-private:
-	int	_current;
+  private:
+	int _current;
 	Contact _contacts[8];
 
-public:
+  public:
 	Phonebook(void);
 	~Phonebook(void);
 
 	Contact *getContacts(void);
-	void	findContact(const int);
+	void findContact(const int);
 
-	void	addContact(const Contact &contact);
-	void	printContacts(void);
+	void addContact(const Contact &contact);
+	void printContacts(void);
 
-	bool	isFull(void) const;
-	int		currentCount(void) const;
+	bool isFull(void) const;
+	int currentCount(void) const;
 };
