@@ -13,14 +13,14 @@ private:
 public:
     Fixed(void);
     Fixed(const Fixed&);
-    Fixed(const int);
-    Fixed(const float);
-    Fixed &operator=(const Fixed&);
-
-    ~Fixed(void);
+    ~Fixed();
+	Fixed &operator=(const Fixed&);
 
     int getRawBits(void) const;
     void setRawBits(const int);
+
+	Fixed(const int);
+    Fixed(const float);
 
     float toFloat(void) const;
     int toInt(void) const;

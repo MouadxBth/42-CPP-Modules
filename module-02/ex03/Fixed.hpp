@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <cmath>
+#include <math.h>
 
 class Fixed
 {
