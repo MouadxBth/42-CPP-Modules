@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/04/30 05:07:01 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/07/02 11:08:43 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADERS_DIR	:= .
 
 SRCS_DIR	:= .
 
-SOURCES	= Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
+SOURCES	= Bureaucrat.cpp main.cpp
 SOURCES	:= $(addprefix $(SRCS_DIR)/,$(SOURCES))
 
 # Objects/Output files
@@ -54,7 +54,7 @@ endef
 
 CXX	:= c++
 
-CPPFLAGS	:= -Wall -Werror -Wextra -Wshadow -std=c++98 -I$(HEADERS_DIR)/
+CPPFLAGS	:= -Wall -Werror -Wextra -std=c++98 -I$(HEADERS_DIR)/#-Wshadow
 
 LDFLAGS	:= -fsanitize=address
 
@@ -66,14 +66,12 @@ NAME	= main
 
 define PROJECT_HEADER
 
-______     _                                  _     _
-| ___ \   | |                                | |   (_)
-| |_/ /__ | |_   _ _ __ ___   ___  _ __ _ __ | |__  _ ___ _ __ ___
-|  __/ _ \| | | | | '_ ` _ \ / _ \| '__| '_ \| '_ \| / __| '_ ` _ \\
-| | | (_) | | |_| | | | | | | (_) | |  | |_) | | | | \__ \ | | | | |
-\_|  \___/|_|\__, |_| |_| |_|\___/|_|  | .__/|_| |_|_|___/_| |_| |_|
-              __/ |                    | |
-             |___/                     |_|
+  ____                                            _
+ |  _ \                                          | |
+ | |_) |_   _ _ __ ___  __ _ _   _  ___ _ __ __ _| |_
+ |  _ <| | | | '__/ _ \/ _` | | | |/ __| '__/ _` | __|
+ | |_) | |_| | | |  __/ (_| | |_| | (__| | | (_| | |_
+ |____/ \__,_|_|  \___|\__,_|\__,_|\___|_|  \__,_|\__|
 
 endef
 export PROJECT_HEADER

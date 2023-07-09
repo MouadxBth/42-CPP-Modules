@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:11:32 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/01 11:35:33 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/09 13:45:17 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,33 @@
 class Bureaucrat
 {
 	private:
-		const std::string name;
-		int grade;
+		const std::string _name;
+		int _grade;
 
 	public:
 		Bureaucrat();
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat& instance);
 		Bureaucrat& operator=(const Bureaucrat& instance);
-	
+
 		Bureaucrat(const std::string& name, int grade);
 
-		const std::string& getName() const;
-		int getGrade() const;
+		const std::string&	getName() const;
+		int	getGrade() const;
 
-		void    incrementGrade();
-		void    decrementGrade();
-	
-		class GradeTooHighException : public std::runtime_error
+		void	incrementGrade();
+		void	decrementGrade();
+
+		class GradeTooHighException : public std::exception
 		{
 			public:
-				GradeTooHighException(const std::string& error = "Grade too high") : runtime_error(error) {}
+				virtual const char * what() const throw();
 		};
 
-		class GradeTooLowException : public std::runtime_error
+		class GradeTooLowException : public std::exception
 		{
 			public:
-				GradeTooLowException(const std::string& error = "Grade too low") : runtime_error(error) {}
+				virtual const char * what() const throw();
 		};
 };
 
