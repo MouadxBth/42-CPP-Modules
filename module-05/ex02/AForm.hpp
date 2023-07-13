@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 17:22:28 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 17:22:29 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:46:59 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 	private:
 		const std::string _name;
@@ -27,12 +27,12 @@ class Form
 		const int _executingGrade;
 
 	public:
-		Form();
-		~Form();
-		Form(const Form& instance);
-		Form& operator=(const Form& instance);
+		AForm();
+		~AForm();
+		AForm(const AForm& instance);
+		AForm& operator=(const AForm& instance);
 
-		Form(const std::string name,
+		AForm(const std::string name,
 			const int signingGrade,
 			const int executingGrade,
 			bool formSigned = false);
@@ -41,8 +41,6 @@ class Form
 		bool isSigned() const;
 		int getSigningGrade() const;
 		int getExecutingGrade() const;
-
-		void	beSigned(Bureaucrat& instance);
 
 		class GradeTooHighException : public std::exception
 		{
@@ -56,7 +54,12 @@ class Form
 				virtual const char *what() const throw();
 		};
 
+		void	beSigned(Bureaucrat& instance) throw(GradeTooHighException, GradeTooLowException);
+
+		void	execute(const Bureaucrat &instance) const throw(GradeTooLowException, std::runtime_error);
+
+		virtual void	executeForm() const = 0;
 };
 
 
-std::ostream& operator<<(std::ostream& output, const Form& instance);
+std::ostream& operator<<(std::ostream& output, const AForm& instance);

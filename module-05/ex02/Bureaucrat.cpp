@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:33:26 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 15:26:53 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:48:59 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ std::ostream& operator<<(std::ostream& output, const Bureaucrat& instance)
     return (output);
 }
 
-void	Bureaucrat::signForm(Form& instance)
+void	Bureaucrat::signForm(AForm& instance)
 {
 	try
 	{
@@ -133,5 +133,25 @@ void	Bureaucrat::signForm(Form& instance)
 			<< e.what()
 			<< std::endl;
 	}
+}
 
+void Bureaucrat::executeForm(const AForm& instance) const
+{
+	try
+	{
+		instance.execute(*this);
+		std::cout << this->_name
+			<< " executed form "
+			<< instance.getName()
+			<< std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << this->_name
+			<< " couldn't execute form "
+			<< instance.getName()
+			<< " because "
+			<< e.what()
+			<< std::endl;
+	}
 }

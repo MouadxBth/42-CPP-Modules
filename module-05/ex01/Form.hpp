@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:49:07 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 13:51:06 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:21:33 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ class Form
 		int getSigningGrade() const;
 		int getExecutingGrade() const;
 
-		void	beSigned(Bureaucrat& instance);
-
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -55,6 +53,8 @@ class Form
 			public:
 				virtual const char *what() const throw();
 		};
+
+		void	beSigned(Bureaucrat& instance) throw(GradeTooHighException, GradeTooLowException);
 
 };
 

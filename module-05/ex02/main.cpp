@@ -6,12 +6,15 @@
 /*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:42 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 17:02:25 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:08:03 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 static void ft_print_separator(int current = 0, int length = 128)
 {
@@ -153,128 +156,43 @@ static void ft_third()
 static void ft_fourth()
 {
 	ft_print_separator(4);
-
 	std::cout << "=> Testing:\n"
-		<< "\tDefault constructor\n"
-		<< "\tParameterized constructor (highest grade)\n"
+		<< "\tShrubberyCreationForm Default constructor\n"
+		<< "\tParameterized constructor (string: test)\n"
 		<< "\tCopy constructor\n"
-		<< "\tParameterized constructor (random grade)\n"
-		<< "\tParameterized constructor (lowest grade)\n"
+		<< "\tParameterized constructor (string: <EMPTY>)\n"
+		<< "=> Signing:\n"
+		<< "\tShrubberyCreationForm Default constructor\n"
+		<< "\tParameterized constructor (string: test)\n"
+		<< "\tCopy constructor\n"
+		<< "\tParameterized constructor (string: <EMPTY>)\n"
+		<< "=> Executing:\n"
+		<< "\tShrubberyCreationForm Default constructor\n"
+		<< "\tParameterized constructor (string: test)\n"
+		<< "\tCopy constructor\n"
+		<< "\tParameterized constructor (string: <EMPTY>)\n"
 		<< "=> Expecting:\n"
 		<< "\tNo exceptions should be thrown\n"
 		<< std::endl;
 	ft_print_separator();
 
-	Form defaultForm;
-	Form first("First", 1, 1);
-	Form firstClone(first);
-	Form second("Second", 56, 76);
-	Form third("Third", 150, 150);
+	Bureaucrat bureaucrat("Mawi", 1);
 
-	std::cout << "\n"
-		<< defaultForm << "\n"
-		<< first << "\n"
-		<< firstClone << "\n"
-		<< second << "\n"
-		<< third << "\n"
-		<< std::endl;
-}
-
-static void ft_fifth()
-{
-	ft_print_separator(5);
-
-	std::cout << "=> Testing:\n"
-		<< "\tParameterized constructor: Signing grade (higher than the highest grade)\n"
-		<< "\tParameterized constructor: Signing grade (lower than the lowest grade)\n"
-		<< "\tParameterized constructor: Executing grade (higher than the highest grade)\n"
-		<< "\tParameterized constructor: Executing grade (lower than the lowest grade)\n"
-		<< "=> Expecting:\n"
-		<< "\tParameterized constructor: Signing grade (higher than the highest grade) - Should throw a GradeTooHighException\n"
-		<< "\tParameterized constructor: Signing grade (lower than the lowest grade) - Should throw a GradeTooLowException\n"
-		<< "\tParameterized constructor: Executing grade (higher than the highest grade) - Should throw a GradeTooHighException\n"
-		<< "\tParameterized constructor: Executing grade (lower than the lowest grade) - Should throw a GradeTooLowException\n"
-		<< "\tNo other test should throw an exception\n"
-		<< std::endl;
-	ft_print_separator();
-
-	try
-	{
-		std::cout << "Attempting to create: Form(Signing grade = 0)..." << std::endl;
-		Form form("Form", 0, 1);
-	}
-	catch (std::exception & e)
-	{
-		std::cerr << "X) " << e.what() << std::endl;
-	}
-
-	try
-	{
-		std::cout << "Attempting to create: Form(Signing grade = 151)..." << std::endl;
-		Form form("Form", 151, 1);
-	}
-	catch (std::exception & e)
-	{
-		std::cerr << "X) " << e.what() << std::endl;
-	}
-
-	try
-	{
-		std::cout << "Attempting to create: Form(Executing grade = 0)..." << std::endl;
-		Form form("Form", 1, 0);
-	}
-	catch (std::exception & e)
-	{
-		std::cerr << "X) " << e.what() << std::endl;
-	}
-
-	try
-	{
-		std::cout << "Attempting to create: Form(Executing grade = 151)..." << std::endl;
-		Form form("Form", 1, 151);
-	}
-	catch (std::exception & e)
-	{
-		std::cerr << "X) " << e.what() << std::endl;
-	}
-
-	std::cout << std::endl;
-}
-
-static void ft_sixth()
-{
-	ft_print_separator(6);
-
-	std::cout << "=> Testing:\n"
-		<< "\tSign form: Current Signing grade: 1 | Required signing grade: 1\n"
-		<< "\tSign form: Current Signing grade: 1 | Required signing grade: 150\n"
-		<< "\tSign form: Current Signing grade: 2 | Required signing grade: 1\n"
-		<< "\tSign form: Current Signing grade: 2 | Required signing grade: 150\n"
-		<< "=> Expecting:\n"
-		<< "\tSign form: Current Signing grade: 2 | Required signing grade: 1 - Should throw a GradeTooLowException\n"
-		<< "\tNo other test should throw an exception\n"
-		<< std::endl;
-	ft_print_separator();
-
-	Bureaucrat bureaucrat("Bureaucrat", 1);
-	Form first("First", 1, 1);
-	Form second("Second", 150, 1);
-
-	std::cout << first << "\n"
-		<< second << "\n";
+	ShrubberyCreationForm first;
+	ShrubberyCreationForm second("test");
+	ShrubberyCreationForm secondClone(second);
+	ShrubberyCreationForm third("");
 
 	bureaucrat.signForm(first);
 	bureaucrat.signForm(second);
+	bureaucrat.signForm(secondClone);
+	bureaucrat.signForm(third);
 
-	bureaucrat.decrementGrade();
-	std::cout << bureaucrat << "\n";
-
-	bureaucrat.signForm(first);
-	bureaucrat.signForm(second);
-
-	std::cout << std::endl;
+	bureaucrat.executeForm(first);
+	bureaucrat.executeForm(second);
+	bureaucrat.executeForm(secondClone);
+	bureaucrat.executeForm(third);
 }
-
 
 int main()
 {
@@ -282,7 +200,6 @@ int main()
 	ft_second();
 	ft_third();
 	ft_fourth();
-	ft_fifth();
-	ft_sixth();
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 11:21:36 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 17:05:29 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:22:16 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int Form::getExecutingGrade() const
 	return (this->_executingGrade);
 }
 
-void Form::beSigned(Bureaucrat& instance)
+void Form::beSigned(Bureaucrat& instance) throw(GradeTooHighException, GradeTooLowException)
 {
 	if (instance.getGrade() > getSigningGrade())
 		throw Form::GradeTooLowException();
