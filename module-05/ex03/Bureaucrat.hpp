@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:11:32 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/02 11:17:54 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:48:33 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 # include <string> // not necessary, iostream already contains <string>
 # include <iostream>
+# include "AForm.hpp"
+
+class AForm;
 
 class Bureaucrat
 {
@@ -32,8 +35,10 @@ class Bureaucrat
 		const std::string& getName() const;
 		int getGrade() const;
 
-		void    incrementGrade();
-		void    decrementGrade();
+		void	incrementGrade();
+		void	decrementGrade();
+
+		void	signForm(AForm& instance);
 
 		class GradeTooHighException : public std::exception
 		{
@@ -46,6 +51,8 @@ class Bureaucrat
 			public:
 				virtual const char * what() const throw();
 		};
+
+		void executeForm(const AForm& form) const;
 };
 
 std::ostream& operator<<(std::ostream& output, const Bureaucrat& instance);

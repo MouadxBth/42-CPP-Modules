@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+         #
+#    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/04/30 05:07:01 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/07/13 18:58:31 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ HEADERS_DIR	:= .
 
 SRCS_DIR	:= .
 
-SOURCES	= Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
+SOURCES	= AForm.cpp Bureaucrat.cpp \
+	ShrubberyCreationForm.cpp RobotomyRequestForm.cpp \
+	PresidentialPardonForm.cpp Intern.cpp main.cpp
 SOURCES	:= $(addprefix $(SRCS_DIR)/,$(SOURCES))
 
 # Objects/Output files
@@ -54,7 +56,7 @@ endef
 
 CXX	:= c++
 
-CPPFLAGS	:= -Wall -Werror -Wextra -Wshadow -std=c++98 -I$(HEADERS_DIR)/
+CPPFLAGS	:= -Wall -Werror -Wextra -std=c++98 -I$(HEADERS_DIR)/ -fsanitize=address
 
 LDFLAGS	:= -fsanitize=address
 
