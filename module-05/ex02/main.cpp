@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:42 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 16:08:03 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:48:04 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,31 +157,163 @@ static void ft_fourth()
 {
 	ft_print_separator(4);
 	std::cout << "=> Testing:\n"
+		<< "*Part one:\n"
 		<< "\tShrubberyCreationForm Default constructor\n"
 		<< "\tParameterized constructor (string: test)\n"
 		<< "\tCopy constructor\n"
-		<< "\tParameterized constructor (string: <EMPTY>)\n"
-		<< "=> Signing:\n"
-		<< "\tShrubberyCreationForm Default constructor\n"
-		<< "\tParameterized constructor (string: test)\n"
-		<< "\tCopy constructor\n"
-		<< "\tParameterized constructor (string: <EMPTY>)\n"
-		<< "=> Executing:\n"
-		<< "\tShrubberyCreationForm Default constructor\n"
-		<< "\tParameterized constructor (string: test)\n"
-		<< "\tCopy constructor\n"
-		<< "\tParameterized constructor (string: <EMPTY>)\n"
+		<< "\tParameterized constructor (string: <EMPTY>)\n\n"
+		<< "*Part two:\n"
+		<< "\tExecuting unsigned ShrubberyCreationForm (default)\n"
+		<< "\tExecuting unsigned ShrubberyCreationForm (string: test)\n"
+		<< "\tExecuting unsigned ShrubberyCreationForm (clone)\n"
+		<< "\tExecuting unsigned ShrubberyCreationForm (string: <EMPTY>)\n\n"
+		<< "*Part three:\n"
+		<< "\tExecuting signed ShrubberyCreationForm (default)\n"
+		<< "\tExecuting signed ShrubberyCreationForm (string: test)\n"
+		<< "\tExecuting signed ShrubberyCreationForm (clone)\n"
+		<< "\tExecuting signed ShrubberyCreationForm (string: <EMPTY>)\n"
 		<< "=> Expecting:\n"
+		<< "*Part one:\n"
 		<< "\tNo exceptions should be thrown\n"
+		<< "*Part two:\n"
+		<< "\tAll tests should fail\n"
+		<< "*Part three:\n"
+		<< "\tAll tests should pass\n"
 		<< std::endl;
 	ft_print_separator();
 
 	Bureaucrat bureaucrat("Mawi", 1);
 
+	std::cout << "Part one:\n" << std::endl;
+
 	ShrubberyCreationForm first;
 	ShrubberyCreationForm second("test");
 	ShrubberyCreationForm secondClone(second);
 	ShrubberyCreationForm third("");
+
+	std::cout << "\nPart two:\n" << std::endl;
+
+	bureaucrat.executeForm(first);
+	bureaucrat.executeForm(second);
+	bureaucrat.executeForm(secondClone);
+	bureaucrat.executeForm(third);
+
+	std::cout << "\nPart three:\n" << std::endl;
+
+	bureaucrat.signForm(first);
+	bureaucrat.signForm(second);
+	bureaucrat.signForm(secondClone);
+	bureaucrat.signForm(third);
+
+	bureaucrat.executeForm(first);
+	bureaucrat.executeForm(second);
+	bureaucrat.executeForm(secondClone);
+	bureaucrat.executeForm(third);
+}
+static void ft_fifth()
+{
+	ft_print_separator(5);
+	std::cout << "=> Testing:\n"
+		<< "*Part one:\n"
+		<< "\tRobotomyRequestForm Default constructor\n"
+		<< "\tParameterized constructor (string: test)\n"
+		<< "\tCopy constructor\n"
+		<< "\tParameterized constructor (string: <EMPTY>)\n\n"
+		<< "*Part two:\n"
+		<< "\tExecuting unsigned RobotomyRequestForm (default)\n"
+		<< "\tExecuting unsigned RobotomyRequestForm (string: test)\n"
+		<< "\tExecuting unsigned RobotomyRequestForm (clone)\n"
+		<< "\tExecuting unsigned RobotomyRequestForm (string: <EMPTY>)\n\n"
+		<< "*Part three:\n"
+		<< "\tExecuting signed RobotomyRequestForm (default)\n"
+		<< "\tExecuting signed RobotomyRequestForm (string: test)\n"
+		<< "\tExecuting signed RobotomyRequestForm (clone)\n"
+		<< "\tExecuting signed RobotomyRequestForm (string: <EMPTY>)\n"
+		<< "=> Expecting:\n"
+		<< "*Part one:\n"
+		<< "\tNo exceptions should be thrown\n"
+		<< "*Part two:\n"
+		<< "\tAll tests should fail\n"
+		<< "*Part three:\n"
+		<< "\tAll tests should pass\n"
+		<< std::endl;
+	ft_print_separator();
+
+	Bureaucrat bureaucrat("Mawi", 1);
+
+	std::cout << "Part one:\n" << std::endl;
+
+	RobotomyRequestForm first;
+	RobotomyRequestForm second("test");
+	RobotomyRequestForm secondClone(second);
+	RobotomyRequestForm third("");
+
+	std::cout << "\nPart two:\n" << std::endl;
+
+	bureaucrat.executeForm(first);
+	
+	bureaucrat.executeForm(second);
+	bureaucrat.executeForm(secondClone);
+	bureaucrat.executeForm(third);
+
+	std::cout << "\nPart three:\n" << std::endl;
+
+	bureaucrat.signForm(first);
+	bureaucrat.signForm(second);
+	bureaucrat.signForm(secondClone);
+	bureaucrat.signForm(third);
+
+	bureaucrat.executeForm(first);
+	bureaucrat.executeForm(second);
+	bureaucrat.executeForm(secondClone);
+	bureaucrat.executeForm(third);
+}
+static void ft_sixth()
+{
+	ft_print_separator(6);
+	std::cout << "=> Testing:\n"
+		<< "*Part one:\n"
+		<< "\tPresidentialPardonForm Default constructor\n"
+		<< "\tParameterized constructor (string: test)\n"
+		<< "\tCopy constructor\n"
+		<< "\tParameterized constructor (string: <EMPTY>)\n\n"
+		<< "*Part two:\n"
+		<< "\tExecuting unsigned PresidentialPardonForm (default)\n"
+		<< "\tExecuting unsigned PresidentialPardonForm (string: test)\n"
+		<< "\tExecuting unsigned PresidentialPardonForm (clone)\n"
+		<< "\tExecuting unsigned PresidentialPardonForm (string: <EMPTY>)\n\n"
+		<< "*Part three:\n"
+		<< "\tExecuting signed PresidentialPardonForm (default)\n"
+		<< "\tExecuting signed PresidentialPardonForm (string: test)\n"
+		<< "\tExecuting signed PresidentialPardonForm (clone)\n"
+		<< "\tExecuting signed PresidentialPardonForm (string: <EMPTY>)\n"
+		<< "=> Expecting:\n"
+		<< "*Part one:\n"
+		<< "\tNo exceptions should be thrown\n"
+		<< "*Part two:\n"
+		<< "\tAll tests should fail\n"
+		<< "*Part three:\n"
+		<< "\tAll tests should pass\n"
+		<< std::endl;
+	ft_print_separator();
+
+	Bureaucrat bureaucrat("Mawi", 1);
+
+	std::cout << "Part one:\n" << std::endl;
+
+	PresidentialPardonForm first;
+	PresidentialPardonForm second("test");
+	PresidentialPardonForm secondClone(second);
+	PresidentialPardonForm third("");
+
+	std::cout << "\nPart two:\n" << std::endl;
+
+	bureaucrat.executeForm(first);
+	bureaucrat.executeForm(second);
+	bureaucrat.executeForm(secondClone);
+	bureaucrat.executeForm(third);
+
+	std::cout << "\nPart three:\n" << std::endl;
 
 	bureaucrat.signForm(first);
 	bureaucrat.signForm(second);
@@ -200,6 +332,7 @@ int main()
 	ft_second();
 	ft_third();
 	ft_fourth();
-
+	ft_fifth();
+	ft_sixth();
 	return (0);
 }

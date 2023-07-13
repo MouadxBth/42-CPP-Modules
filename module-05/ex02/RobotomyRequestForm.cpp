@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:27:07 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 15:33:20 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:58:41 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& i
 		AForm::operator=(instance);
 		this->_target = instance.getTarget();
 	}
+	return (*this);
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
@@ -52,10 +53,10 @@ const std::string& RobotomyRequestForm::getTarget() const
 	return (this->_target);
 }
 
-void RobotomyRequestForm::executeForm() const
+void RobotomyRequestForm::executeForm() const throw(std::runtime_error)
 {
 	srand(time(NULL));
-	if (rand() % 2)
+	if (rand() % 2 == 0)
 		std::cout << this->_target
 			<< " has been robotomized successfully"
 			<< std::endl;

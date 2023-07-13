@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:57:24 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 15:59:18 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:57:22 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ class PresidentialPardonForm : public AForm
 
 		const std::string&	getTarget() const;
 
-		void	executeForm() const;
+		void	executeForm() const throw(std::runtime_error);
 };

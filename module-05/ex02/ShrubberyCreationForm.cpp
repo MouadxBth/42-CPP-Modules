@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:32:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 15:51:30 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:04:15 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 		AForm::operator=(instance);
 		this->_target = instance.getTarget();
 	}
+	return (*this);
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
@@ -52,19 +53,16 @@ const std::string& ShrubberyCreationForm::getTarget() const
 	return (this->_target);
 }
 
-void ShrubberyCreationForm::executeForm() const
+void ShrubberyCreationForm::executeForm() const throw(std::runtime_error)
 {
-	std::ofstream file(this->_target + "_shrubbery");
+	std::ofstream file((this->_target + "_shrubbery").c_str());
 
 	if (!file)
-	{
-		std::cerr << "Error creating file: " << this->_target << std::endl;
-		return ;
-	}
-    if (!file.is_open()) {
-        std::cerr << "Error opening file: " << this->_target << std::endl;
-        return;
-    }
+		throw (std::runtime_error("Error creating file: " + this->_target + "_shrubbery"));
+
+
+    if (!file.is_open()) 
+		throw (std::runtime_error("Error opening file: " + this->_target + "_shrubbery"));
 
     file << "       ccee88oo\n";
     file << "    C8O8O8Q8PoOb o8oo\n";
@@ -80,5 +78,5 @@ void ShrubberyCreationForm::executeForm() const
 
     file.close();
 
-    std::cout << "Shrubbery generated and saved to: " << this->_target << std::endl;
+    std::cout << "Shrubbery generated and saved to: " << this->_target << "_shrubbery" << std::endl;
 }

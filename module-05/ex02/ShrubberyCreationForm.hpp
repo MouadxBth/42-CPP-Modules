@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:26:35 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 15:38:37 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:57:13 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ class ShrubberyCreationForm : public AForm
 
 		const std::string&	getTarget() const;
 
-		void	executeForm() const;
+		void	executeForm() const throw(std::runtime_error);
 
 };

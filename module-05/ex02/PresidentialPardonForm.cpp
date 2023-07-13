@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:02:59 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 15:42:25 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:58:49 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 		AForm::operator=(instance);
 		this->_target = instance.getTarget();
 	}
+	return (*this);
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
@@ -52,7 +53,7 @@ const std::string& PresidentialPardonForm::getTarget() const
 	return (this->_target);
 }
 
-void PresidentialPardonForm::executeForm() const
+void PresidentialPardonForm::executeForm() const throw(std::runtime_error)
 {
 	std::cout << this->_target
 		<< " has been pardoned by Zaphod Beeblebrox. "

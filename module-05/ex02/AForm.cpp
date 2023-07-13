@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 11:21:36 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 15:44:27 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:06:44 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int AForm::getExecutingGrade() const
 	return (this->_executingGrade);
 }
 
-void AForm::beSigned(Bureaucrat& instance)
+void AForm::beSigned(Bureaucrat& instance) throw(GradeTooHighException, GradeTooLowException)
 {
 	if (instance.getGrade() > getSigningGrade())
 		throw AForm::GradeTooLowException();

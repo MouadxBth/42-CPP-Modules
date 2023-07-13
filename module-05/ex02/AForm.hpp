@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 17:22:28 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 15:46:59 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/07/13 19:10:08 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class AForm
 
 	public:
 		AForm();
-		~AForm();
+		virtual ~AForm();
 		AForm(const AForm& instance);
 		AForm& operator=(const AForm& instance);
 
@@ -58,7 +58,7 @@ class AForm
 
 		void	execute(const Bureaucrat &instance) const throw(GradeTooLowException, std::runtime_error);
 
-		virtual void	executeForm() const = 0;
+		virtual void	executeForm() const throw(std::runtime_error) = 0;
 };
 
 
