@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/07/13 19:25:50 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/08/05 23:15:59 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,6 +136,7 @@ clean: cleanalert cleanobjdir cleandepdir
 fclean: clean
 	$(call colorize,$(GREEN),Cleaning Executable...)
 	-$(CLEAN_FILES) $(NAME)
+	-$(CLEAN_FILES) *_shrubbery
 
 re: fclean all
 

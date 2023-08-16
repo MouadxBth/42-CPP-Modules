@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:27:07 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 17:58:41 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/05 23:17:07 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ RobotomyRequestForm::RobotomyRequestForm()
 	_target("default")
 {
 	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
+	
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()
@@ -29,6 +30,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& instance)
 	_target(instance.getTarget())
 {
 	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
+	
 }
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& instance)
@@ -39,6 +41,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& i
 		AForm::operator=(instance);
 		this->_target = instance.getTarget();
 	}
+	
 	return (*this);
 }
 
@@ -47,6 +50,7 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target)
 	_target(target)
 {
 	std::cout << "RobotomyRequestForm parametrized constructor called" << std::endl;
+	
 }
 const std::string& RobotomyRequestForm::getTarget() const
 {
@@ -55,13 +59,12 @@ const std::string& RobotomyRequestForm::getTarget() const
 
 void RobotomyRequestForm::executeForm() const throw(std::runtime_error)
 {
-	srand(time(NULL));
 	if (rand() % 2 == 0)
 		std::cout << this->_target
 			<< " has been robotomized successfully"
 			<< std::endl;
 	else
-		std::cout << "Faild to robotomize "
+		std::cout << "Failed to robotomize "
 			<< this->_target
 			<< std::endl;
 }

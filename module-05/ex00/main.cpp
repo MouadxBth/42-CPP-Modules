@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 11:05:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 16:59:42 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:49:33 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void ft_second()
 		<< "=> Expecting:\n"
 		<< "\tParameterized constructor (higher than the highest grade) - Should throw a GradeTooHighException\n"
 		<< "\tParameterized constructor (lower than the lowest grade) - Should throw a GradeTooLowException\n"
-		<< "\tNo other test should throw an exception\n"
+		<< "\tNo other exception should be thrown\n"
 		<< std::endl;
 	ft_print_separator();
 

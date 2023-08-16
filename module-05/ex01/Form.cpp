@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 11:21:36 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 14:22:16 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:05:32 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Form::~Form()
 	std::cout << "Form deconstructor called: " << (*this) << std::endl;
 }
 
-Form::Form(const Form& instance) :
+Form::Form(const Form& instance) throw(GradeTooHighException, GradeTooLowException) :
 	_name(instance.getName()),
 	_formSigned(instance.isSigned()),
 	_signingGrade(instance.getSigningGrade()),
@@ -44,7 +44,7 @@ Form::Form(const Form& instance) :
 	verifyGrades(this->_signingGrade, this->_executingGrade);
 }
 
-Form& Form::operator=(const Form& instance)
+Form& Form::operator=(const Form& instance) throw(GradeTooHighException, GradeTooLowException)
 {
 	std::cout << "Form copy assignment operator called" << std::endl;
 	this->_formSigned = instance.isSigned();
@@ -52,7 +52,11 @@ Form& Form::operator=(const Form& instance)
 	return (*this);
 }
 
-Form::Form(const std::string name, const int signingGrade, const int executingGrade, bool formSigned) :
+Form::Form(const std::string name,
+	const int signingGrade,
+	const int executingGrade,
+	bool formSigned) throw(GradeTooHighException, GradeTooLowException) :
+	
 	_name(name),
 	_formSigned(formSigned),
 	_signingGrade(signingGrade),

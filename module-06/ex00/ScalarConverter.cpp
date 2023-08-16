@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 14:49:27 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 17:52:16 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/07 18:58:45 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& instance)
 {
     (void) instance;
     return (*this);
+}
+
+static void printImpossible()
+{
+    std::cout << "char: impossible\n"
+            << "int: impossible\n" 
+            << "float: impossible\n" 
+            << "double: impossible" 
+            << std::endl;
 }
 
 static std::string trim(const std::string& str)
@@ -131,22 +140,20 @@ static void printInt(const std::string& input)
     std::istringstream iss(input);
 
     iss >> i;
+    if (iss.fail() || !iss.eof())
+        return (printImpossible());
     c = static_cast<char>(i);
     f = static_cast<float>(i);
     d = static_cast<double>(i);
 
-    if (iss.fail() || (i < std::numeric_limits<char>::min() || i > std::numeric_limits<char>::max()))
+    if (i < std::numeric_limits<char>::min() || i > std::numeric_limits<char>::max())
         std::cout << "char: impossible ";
     else
         std::cout << "char: " << (std::isprint(c) ? std::string("\'") + c + "\'" : "Non displayable");
     
-    if (iss.fail() || !iss.eof())
-        std::cout << "\nint: impossible";
-    else
-        std::cout << "\nint: " << i;
-    
     std::cout << std::fixed
-        << std::setprecision(1)
+        << std::setprecision(1) 
+        << "\nint: " << i 
         << "\nfloat: " << f << "f"
         << "\ndouble: " << d
         << std::endl;
@@ -162,36 +169,30 @@ static void printFloat(const std::string& input)
     std::istringstream iss(input);
 
     iss >> f;
+    if (iss.fail())
+        return (printImpossible());
     c = static_cast<char>(f);
     i = static_cast<int>(f);
     d = static_cast<double>(f);
 
-    if (iss.fail() || (f < std::numeric_limits<char>::min() || f > std::numeric_limits<char>::max()))
+    if (f < std::numeric_limits<char>::min() || f > std::numeric_limits<char>::max())
         std::cout << "char: impossible";
     else
         std::cout << "char: " << (std::isprint(c) ? std::string("\'") + c + "\'" : "Non displayable");
     
-    if (iss.fail() || (f < std::numeric_limits<int>::min() || f > std::numeric_limits<int>::max()))
+    if (f < std::numeric_limits<int>::min() || f > std::numeric_limits<int>::max())
         std::cout << "\nint: impossible";
     else
         std::cout << "\nint: " << i;
 
-    if (iss.fail())
-        std::cout << "\nfloat: impossible";
-    else
-        std::cout << std::fixed
-            << std::setprecision(1)
-            << "\nfloat: " << f << "f";
-    
     std::cout << std::fixed
-            << std::setprecision(1) 
+            << std::setprecision(1)
+            << "\nfloat: " << f << "f"
             << "\ndouble: " << d << std::endl;
 }
 
 static void printDouble(const std::string& input)
 {
-    double result;
-
     char c;
     int i;
     float f;
@@ -199,34 +200,32 @@ static void printDouble(const std::string& input)
 
     std::istringstream iss(input);
 
-    iss >> result;
-    if (!iss.fail())
-        d = static_cast<double>(result);
+    iss >> d;
+    if (iss.fail() || !iss.eof())
+        return (printImpossible());
     c = static_cast<char>(d);
     i = static_cast<int>(d);
     f = static_cast<float>(d);
 
-    if (iss.fail() || (d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max()))
+    if (d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max())
         std::cout << "char: impossible";
     else
         std::cout << "char: " << (std::isprint(c) ? std::string("\'") + c + "\'" : "Non displayable");
     
-    if (iss.fail() || (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max()))
+    if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max())
         std::cout << "\nint: impossible";
     else
         std::cout << "\nint: " << i;
 
-    if (iss.fail() || (d < -std::numeric_limits<float>::max() || d > std::numeric_limits<float>::max()))
+    if (d < -std::numeric_limits<float>::max() || d > std::numeric_limits<float>::max())
         std::cout << "\nfloat: impossible";
     else
         std::cout << std::fixed << std::setprecision(1) << "\nfloat: " << f << "f";
 
-    if (iss.fail() || !iss.eof())
-        std::cout << "\ndouble: impossible";
-    else
-        std::cout << std::fixed << std::setprecision(1) << "\ndouble: " << d;
-    
-    std::cout << std::endl; 
+    std::cout << std::fixed 
+        << std::setprecision(1) 
+        << "\ndouble: " << d 
+        << std::endl; 
 }
 
 static void printSpecial(const std::string& input)
@@ -239,15 +238,6 @@ static void printSpecial(const std::string& input)
     else if (input == "-inf" || input == "-inff")
         std::cout << "float: -inff\ndouble: -inf";
     std::cout << std::endl;
-}
-
-static void printImpossible()
-{
-    std::cout << "char: impossible\n"
-            << "int: impossible\n" 
-            << "float: impossible\n" 
-            << "double: impossible" 
-            << std::endl;
 }
 
 void ScalarConverter::convert(const std::string& str)

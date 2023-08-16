@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 11:33:26 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 15:26:53 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:02:57 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
+static void	verifyGrade(int grade)
+{
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+}
 
 Bureaucrat::Bureaucrat()
 	: _name("default"), _grade(150)
@@ -18,7 +26,7 @@ Bureaucrat::Bureaucrat()
     std::cout << "Bureaucrat Default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string& _name, int _grade)
+Bureaucrat::Bureaucrat(const std::string& _name, int _grade) throw(GradeTooHighException, GradeTooLowException)
 	: _name(_name), _grade(_grade)
 {
     std::cout << "Bureaucrat constructor called: "
@@ -27,13 +35,10 @@ Bureaucrat::Bureaucrat(const std::string& _name, int _grade)
 		<< _grade
 		<< std::endl;
 
-    if (_grade > 150)
-        throw Bureaucrat::GradeTooLowException();
-    if (_grade < 1)
-        throw Bureaucrat::GradeTooHighException();
+    verifyGrade(_grade);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& instance)
+Bureaucrat::Bureaucrat(const Bureaucrat& instance) throw(GradeTooHighException, GradeTooLowException)
 	: _name(instance.getName()), _grade(instance.getGrade())
 {
     std::cout << "Bureaucrat copy constructor called: "
@@ -42,13 +47,10 @@ Bureaucrat::Bureaucrat(const Bureaucrat& instance)
 		<< this->_grade
 		<< std::endl;
 
-    if (_grade > 150)
-        throw Bureaucrat::GradeTooLowException();
-    if (_grade < 1)
-        throw Bureaucrat::GradeTooHighException();
+    verifyGrade(_grade);
 }
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& instance)
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& instance) throw(GradeTooHighException, GradeTooLowException)
 {
     std::cout << "Bureaucrat copy assignment operator called: "
 		<< instance.getName()
@@ -57,10 +59,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& instance)
 		<< std::endl;
 
     this->_grade = instance.getGrade();
-    if (this->_grade > 150)
-        throw Bureaucrat::GradeTooLowException();
-    if (this->_grade < 1)
-        throw Bureaucrat::GradeTooHighException();
+    verifyGrade(this->_grade);
     return (*this);
 }
 
@@ -72,14 +71,14 @@ Bureaucrat::~Bureaucrat()
 		<< std::endl;
 }
 
-void    Bureaucrat::incrementGrade()
+void    Bureaucrat::incrementGrade() throw(GradeTooHighException)
 {
     this->_grade--;
     if (this->getGrade() < 1)
         throw Bureaucrat::GradeTooHighException();
 }
 
-void    Bureaucrat::decrementGrade()
+void    Bureaucrat::decrementGrade() throw(GradeTooLowException)
 {
     this->_grade++;
     if (this->getGrade() > 150)

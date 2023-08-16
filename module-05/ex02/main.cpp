@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:42 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 18:48:04 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:15:15 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,6 +328,7 @@ static void ft_sixth()
 
 int main()
 {
+	std::srand(time(NULL));
 	ft_first();
 	ft_second();
 	ft_third();

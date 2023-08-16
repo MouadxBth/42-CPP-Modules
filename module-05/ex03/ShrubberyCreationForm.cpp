@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:32:37 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 18:04:15 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/05 23:06:13 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void ShrubberyCreationForm::executeForm() const throw(std::runtime_error)
     file << "      6OuU  /p u gcoUodpP\n";
     file << "        \\\\\\//  /douUP\n";
     file << "          \\\\\\////\n";
-    file << "            |||/\\\n";
-    file << "            |||\\/\\\n";
-    file << "            ||||||\n";
-    file << "MAWI  ......//||||\\...\n";
+    file << "            ||M/\\\n";
+    file << "            ||A\\/\\\n";
+    file << "            ||W|||\n";
+    file << "MAWI  ......//I|||\\...\n";
 
     file.close();
 

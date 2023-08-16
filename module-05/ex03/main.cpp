@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:42 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/13 19:22:30 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:15:06 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void ft_first()
 		<< std::endl;
 	ft_print_separator();
 
-	Bureaucrat defaultBureaucrat;
+	Bureaucrat defaultBureaucrat();
 	Bureaucrat first("First", 1);
 	Bureaucrat firstClone(first);
 	Bureaucrat second("Second", 56);
@@ -329,96 +329,37 @@ static void ft_sixth()
 
 static void ft_seventh()
 {
-	ft_print_separator(7);
+	ft_print_separator(1);
 	std::cout << "=> Testing:\n"
-		<< "*Part one:\n"
-		<< "\tIntern Default constructor\n"
-		<< "\tIntern makeForm (string: shrubbery creation)\n"
-		<< "\tIntern makeForm (string: ShRubBeRy CrEaTiOn)\n"
-		<< "\tIntern makeForm (string: robotomy request)\n"
-		<< "\tIntern makeForm (string: presidential pardon)\n"
-		<< "\tIntern makeForm (string: unknown form)\n"
-		<< "*Part two:\n"
-		<< "\tSigning Form if it's not null (string: shrubbery creation)\n"
-		<< "\tSigning Form if it's not null (string: ShRubBeRy CrEaTiOn)\n"
-		<< "\tSigning Form if it's not null (string: robotomy request)\n"
-		<< "\tSigning Form if it's not null (string: presidential pardon)\n"
-		<< "\tSigning Form if it's not null (string: unknown form)\n"
-		<< "*Part three:\n"
-		<< "\tExecuting Form if it's not null (string: shrubbery creation)\n"
-		<< "\tExecuting Form if it's not null (string: ShRubBeRy CrEaTiOn)\n"
-		<< "\tExecuting Form if it's not null (string: robotomy request)\n"
-		<< "\tExecuting Form if it's not null (string: presidential pardon)\n"
-		<< "\tExecuting Form if it's not null (string: unknown form)\n"
-		<< "*Part four:\n"
-		<< "\tExecuting Form (string: shrubbery creation)\n"
-		<< "\tExecuting Form (string: ShRubBeRy CrEaTiOn)\n"
-		<< "\tExecuting Form (string: robotomy request)\n"
-		<< "\tExecuting Form (string: presidential pardon)\n"
+		<< "\tDefault constructor\n"
+		<< "\tParameterized constructor (highest grade)\n"
+		<< "\tCopy constructor\n"
+		<< "\tParameterized constructor (random grade)\n"
+		<< "\tParameterized constructor (lowest grade)\n"
 		<< "=> Expecting:\n"
-		<< "*Part one:\n"
-		<< "\tIntern makeForm (string: unknown form) | should not create a form and return (NULL)\n"
-		<< "*Part two:\n"
-		<< "\tIntern makeForm (string: unknown form) | should not sign\n"
-		<< "*Part three:\n"
-		<< "\tIntern makeForm (string: unknown form) | should not execute\n"
-		<< "*Part four:\n"
-		<< "\tDeleting all dynamically allocated forms | no error should occur\n"
+		<< "\tNo exceptions should be thrown\n"
 		<< std::endl;
 	ft_print_separator();
 
-	Bureaucrat bureaucrat("First", 1);
-
-	std::cout << "Part one:\n" << std::endl;
-
-	Intern intern;
-
-	AForm *shrubberyCreationForm = intern.makeForm("shrubbery creation", "test");
-	AForm *shrubberyCreationFormUppercase = intern.makeForm("ShRubBeRy CrEaTiOn", "test");
-	AForm *robotomyRequestForm = intern.makeForm("robotomy request", "test");
-	AForm *presidentialPardonForm = intern.makeForm("presidential pardon", "test");
-	AForm *unknownForm = intern.makeForm("unknown form", "test");
-
-	std::cout << shrubberyCreationForm 
-		<< robotomyRequestForm 
-		<< presidentialPardonForm 
-		<< unknownForm 
-		<< std::endl;
+	Bureaucrat first("First", 1);
 	
-	std::cout << "\nPart two:\n" << std::endl;
-	if (shrubberyCreationForm)
-		bureaucrat.signForm(*shrubberyCreationForm);
-	if (shrubberyCreationFormUppercase)
-		bureaucrat.signForm(*shrubberyCreationFormUppercase);
-	if (robotomyRequestForm)
-		bureaucrat.signForm(*robotomyRequestForm);
-	if (presidentialPardonForm)
-		bureaucrat.signForm(*presidentialPardonForm);
-	if (unknownForm)
-		bureaucrat.signForm(*unknownForm);
+	Intern someRandomIntern;
+	AForm* rrf;
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 
-	std::cout << "Part three:\n" << std::endl;
+	std::cout << "\n" << first << "\n"
+		<< *rrf << "\n"
+		<< std::endl;
 
-	if (shrubberyCreationForm)
-		bureaucrat.executeForm(*shrubberyCreationForm);
-	if (shrubberyCreationFormUppercase)
-		bureaucrat.executeForm(*shrubberyCreationFormUppercase);
-	if (robotomyRequestForm)
-		bureaucrat.executeForm(*robotomyRequestForm);
-	if (presidentialPardonForm)
-		bureaucrat.executeForm(*presidentialPardonForm);
-	if (unknownForm)
-		bureaucrat.executeForm(*unknownForm);
+	first.signForm(*rrf);
+	first.executeForm(*rrf);
 
-	std::cout << "\nPart four:\n" << std::endl;
-	delete shrubberyCreationForm;
-	delete shrubberyCreationFormUppercase;
-	delete robotomyRequestForm;
-	delete presidentialPardonForm;
+	delete rrf;
 }
 
 int main()
 {
+	std::srand(time(NULL));
 	ft_first();
 	ft_second();
 	ft_third();

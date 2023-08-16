@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+         #
+#    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/07/09 16:45:08 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/08/04 16:08:47 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADERS_DIR	:= .
 
 SRCS_DIR	:= .
 
-SOURCES	= Form.cpp Bureaucrat.cpp main.cpp
+SOURCES	= Bureaucrat.cpp Form.cpp main.cpp
 SOURCES	:= $(addprefix $(SRCS_DIR)/,$(SOURCES))
 
 # Objects/Output files

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouthai <mbouthai@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 12:49:42 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/09 17:02:25 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:07:51 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void ft_print_separator(int current = 0, int length = 128)
 static void ft_first()
 {
 	ft_print_separator(1);
-	std::cout << "=> Testing:\n"
+	std::cout << "=> Testing: Bureaucrat Class\n"
 		<< "\tDefault constructor\n"
 		<< "\tParameterized constructor (highest grade)\n"
 		<< "\tCopy constructor\n"
@@ -54,7 +54,7 @@ static void ft_first()
 static void ft_second()
 {
 	ft_print_separator(2);
-	std::cout << "=> Testing:\n"
+	std::cout << "=> Testing: Bureaucrat Class\n"
 		<< "\tParameterized constructor (higher than the highest grade)\n"
 		<< "\tParameterized constructor (lower than the lowest grade)\n"
 		<< "=> Expecting:\n"
@@ -87,7 +87,7 @@ static void ft_second()
 static void ft_third()
 {
 	ft_print_separator(3);
-	std::cout << "=> Testing:\n"
+	std::cout << "=> Testing: Bureaucrat Class\n"
 		<< "\tIncrementing Bureaucrat (highest grade)\n"
 		<< "\tIncrementing Bureaucrat (random grade)\n"
 		<< "\tIncrementing Bureaucrat (lowest grade)\n"
@@ -154,7 +154,7 @@ static void ft_fourth()
 {
 	ft_print_separator(4);
 
-	std::cout << "=> Testing:\n"
+	std::cout << "=> Testing: Form Class\n"
 		<< "\tDefault constructor\n"
 		<< "\tParameterized constructor (highest grade)\n"
 		<< "\tCopy constructor\n"
