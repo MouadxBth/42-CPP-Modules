@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:29:03 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 19:07:16 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:14:39 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Serializer  &Serializer::operator=(const Serializer& instance)
 
 uintptr_t Serializer::serialize(Data *ptr)
 {
-    return reinterpret_cast<unsigned long>(ptr);
+    return reinterpret_cast<uintptr_t>(ptr);
 }
 
 Data* Serializer::deserialize(uintptr_t raw)

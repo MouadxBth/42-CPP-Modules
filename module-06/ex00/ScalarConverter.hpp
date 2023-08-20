@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 14:40:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/07/29 00:41:12 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:55:05 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 
 class ScalarConverter
 {
-    public:
+    private:
         ScalarConverter();
-        ~ScalarConverter();
         ScalarConverter(const ScalarConverter& instance);
+    public:
+        ~ScalarConverter();
         ScalarConverter& operator=(const ScalarConverter& instance);
 
         static void convert(const std::string& input);

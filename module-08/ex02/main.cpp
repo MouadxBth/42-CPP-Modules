@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 05:58:54 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/08 06:08:53 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:06:27 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,40 @@ int main()
 
         for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end(); ++it)
             std::cout << *it << " ";
+        std::cout << std::endl;
+    }
+    {
+        MutantStack<int> mstack;
+        mstack.push(1);
+        mstack.push(2);
+        mstack.push(3);
+
+        std::cout << "Using regular iterators:" << std::endl;
+        for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end(); ++it)
+        {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "Using reverse iterators:" << std::endl;
+        for (MutantStack<int>::reverse_iterator it = mstack.rbegin(); it != mstack.rend(); ++it)
+        {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "Using const iterators:" << std::endl;
+        for (MutantStack<int>::const_iterator it = mstack.cbegin(); it != mstack.cend(); ++it)
+        {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "Using const reverse iterators:" << std::endl;
+        for (MutantStack<int>::const_reverse_iterator it = mstack.crbegin(); it != mstack.crend(); ++it)
+        {
+            std::cout << *it << " ";
+        }
         std::cout << std::endl;
     }
 	return 0;

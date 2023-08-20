@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 01:55:06 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 17:46:05 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:11:37 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int main(int argc, char* argv[])
 
     std::string input(argv[1]);
     ScalarConverter::convert(input);
+
     return 0;
 }

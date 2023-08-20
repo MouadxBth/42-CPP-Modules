@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:02:12 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/16 05:58:20 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/20 19:40:38 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,11 @@ void    BitcoinExchange::loadDatabase(const std::string& database)
 
 void    BitcoinExchange::calculate(const std::string& fileName)
 {
-    if (fileName.empty() || (fileName.rfind(".csv") == std::string::npos))
+    if (fileName.empty())
     {
         std::cerr << "ERROR: The given file: "
             << fileName
-            << " is not a csv file!"
+            << " is not a valid file!"
             << std::endl;
         std::exit(EXIT_FAILURE);
     } 
