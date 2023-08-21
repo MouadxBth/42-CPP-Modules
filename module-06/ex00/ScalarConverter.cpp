@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 14:49:27 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 18:58:45 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:36:28 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,7 @@ static void printChar(const std::string& input)
     f = static_cast<float>(c);
     d = static_cast<double>(c);
 
-    std::cout << std::fixed
-        << std::setprecision(1)
+    std::cout 
         << "char: " << (std::isprint(c) ? std::string("\'") + c + "\'" : "Non displayable")
         << "\nint: " << i
         << "\nfloat: " << f << "f"
@@ -151,8 +150,7 @@ static void printInt(const std::string& input)
     else
         std::cout << "char: " << (std::isprint(c) ? std::string("\'") + c + "\'" : "Non displayable");
     
-    std::cout << std::fixed
-        << std::setprecision(1) 
+    std::cout
         << "\nint: " << i 
         << "\nfloat: " << f << "f"
         << "\ndouble: " << d
@@ -185,8 +183,7 @@ static void printFloat(const std::string& input)
     else
         std::cout << "\nint: " << i;
 
-    std::cout << std::fixed
-            << std::setprecision(1)
+    std::cout
             << "\nfloat: " << f << "f"
             << "\ndouble: " << d << std::endl;
 }
@@ -220,10 +217,9 @@ static void printDouble(const std::string& input)
     if (d < -std::numeric_limits<float>::max() || d > std::numeric_limits<float>::max())
         std::cout << "\nfloat: impossible";
     else
-        std::cout << std::fixed << std::setprecision(1) << "\nfloat: " << f << "f";
+        std::cout << "\nfloat: " << f << "f";
 
-    std::cout << std::fixed 
-        << std::setprecision(1) 
+    std::cout 
         << "\ndouble: " << d 
         << std::endl; 
 }
@@ -253,10 +249,11 @@ void ScalarConverter::convert(const std::string& str)
     if (isSpecial(input))
         return printSpecial(input);
 
-    if (input.length() <= 1)
-        return printChar(input);
+    
     if (isValidInteger(input))
         return printInt(input);
+    if (input.length() <= 1)
+        return printChar(input);
     if (isValidFloatingPoint(input) && input.find_first_of('f') != std::string::npos)
         printFloat(input);
     else
