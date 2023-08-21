@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 14:49:27 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/21 12:36:28 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:29:26 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,16 @@ static void printInt(const std::string& input)
         << std::endl;
 }
 
-static void printFloat(const std::string& input)
+static void printFloat(const std::string& given)
 {
     char c;
     int i;
     float f;
     double d;
 
+    std::string input(given);
+    
+    input.erase(input.length() - 1);
     std::istringstream iss(input);
 
     iss >> f;
