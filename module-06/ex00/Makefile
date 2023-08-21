@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/08/21 14:29:55 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/08/21 20:01:02 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADERS_DIR	:= .
 
 SRCS_DIR	:= .
 
-SOURCES	= ScalarConverter.cpp test.cpp
+SOURCES	= ScalarConverter.cpp main.cpp
 SOURCES	:= $(addprefix $(SRCS_DIR)/,$(SOURCES))
 
 # Objects/Output files
@@ -56,13 +56,13 @@ CXX	:= c++
 
 CPPFLAGS	:= -Wall -Werror -Wextra -std=c++98 -I$(HEADERS_DIR)/#-Wshadow
 
-LDFLAGS	:= -fsanitize=address
+LDFLAGS	:= #-fsanitize=address
 
 CLEAN_DIR	:= rm -fd
 
 CLEAN_FILES	:= rm -f
 
-NAME	= converter
+NAME	= convert
 
 define PROJECT_HEADER
 

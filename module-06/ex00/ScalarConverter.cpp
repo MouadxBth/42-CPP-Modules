@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 14:49:27 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/21 14:29:26 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:49:49 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ static void printInt(const std::string& input)
     else
         std::cout << "char: " << (std::isprint(c) ? std::string("\'") + c + "\'" : "Non displayable");
     
-    std::cout
+    std::cout << std::fixed << std::setprecision(1)
         << "\nint: " << i 
         << "\nfloat: " << f << "f"
         << "\ndouble: " << d
@@ -186,7 +186,7 @@ static void printFloat(const std::string& given)
     else
         std::cout << "\nint: " << i;
 
-    std::cout
+    std::cout << std::fixed << std::setprecision(1)
             << "\nfloat: " << f << "f"
             << "\ndouble: " << d << std::endl;
 }
@@ -220,9 +220,9 @@ static void printDouble(const std::string& input)
     if (d < -std::numeric_limits<float>::max() || d > std::numeric_limits<float>::max())
         std::cout << "\nfloat: impossible";
     else
-        std::cout << "\nfloat: " << f << "f";
+        std::cout << std::fixed << std::setprecision(1) << "\nfloat: " << f << "f";
 
-    std::cout 
+    std::cout << std::fixed << std::setprecision(1)
         << "\ndouble: " << d 
         << std::endl; 
 }

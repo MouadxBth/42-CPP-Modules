@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:25:10 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 19:06:14 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 20:00:46 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 class Serializer
 {
 
-public:
+private:
     Serializer();
-    ~Serializer();
     Serializer(const Serializer& instance);
+
+public:
+    ~Serializer();
     Serializer  &operator=(const Serializer& instance);
 
     static uintptr_t serialize(Data *ptr);
