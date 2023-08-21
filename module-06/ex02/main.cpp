@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:46:45 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 19:22:52 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:04:23 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void identify(Base* p) {
         std::cout << "B" << std::endl;
     } else if (dynamic_cast<C*>(p)) {
         std::cout << "C" << std::endl;
+    } else {
+        std::cout << "Unknown element!" << std::endl;
     }
 }
 

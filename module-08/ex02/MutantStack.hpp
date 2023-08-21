@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 05:57:58 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/20 19:37:04 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:32:25 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ public:
     typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 
     // Iterator functions
-    iterator begin() { return std::stack<T>::c.begin(); }
-    iterator end() { return std::stack<T>::c.end(); }
+    iterator begin();
+    iterator end();
 
     // Reverse iterators
-    reverse_iterator rbegin() { return std::stack<T>::c.rbegin(); }
-    reverse_iterator rend() { return std::stack<T>::c.rend(); }
+    reverse_iterator rbegin();
+    reverse_iterator rend();
 
     // Const iterators
-    const_iterator cbegin() const { return std::stack<T>::c.begin(); }
-    const_iterator cend() const { return std::stack<T>::c.end(); }
+    const_iterator cbegin() const;
+    const_iterator cend() const;
 
     // Const reverse iterators
-    const_reverse_iterator crbegin() const { return std::stack<T>::c.rbegin(); }
-    const_reverse_iterator crend() const { return std::stack<T>::c.rend(); }
+    const_reverse_iterator crbegin() const;
+    const_reverse_iterator crend() const;
 };

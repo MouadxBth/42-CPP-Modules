@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/08/07 19:47:57 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/08/21 10:12:38 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,8 +73,7 @@ define PROJECT_HEADER
  | | ||  __/ |   
  |_|\__\___|_|   
                  
-                   
-                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                           
 endef
 export PROJECT_HEADER
 

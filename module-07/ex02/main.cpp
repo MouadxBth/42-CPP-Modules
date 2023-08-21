@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:32:38 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 20:06:35 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:21:00 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ template <typename T>
 T& Array<T>::operator[](size_t index) throw(std::exception)
 {
     if (index >= length)
-        throw std::exception();
+        throw std::exception("Array index out of bounds");
+    else if (!elements)
+        throw std::exception("Array is empty!");
     return elements[index];
 }
 
@@ -67,43 +69,45 @@ size_t Array<T>::size() const
 }
 
 int main() {
-    // Testing the Array class template
-    Array<int> arr1(5);  // Create an array of 5 ints
-    for (size_t i = 0; i < arr1.size(); ++i)
-        arr1[i] = i + 1;
+    Array<int> first(5);
 
-    Array<int> arr2(arr1);  // Create a copy of arr1
+    for (size_t index = 0; index < first.size(); ++index)
+        first[index] = index + 1;
 
-    std::cout << "arr1: ";
-    for (size_t i = 0; i < arr1.size(); ++i)
-        std::cout << arr1[i] << " ";
+    Array<int> copy(first);
+
+    std::cout << "first: ";
+    for (size_t index = 0; index < first.size(); ++index)
+        std::cout << first[index] << " ";
     
     std::cout << std::endl;
 
-    std::cout << "arr2: ";
-    for (size_t i = 0; i < arr2.size(); ++i)
-        std::cout << arr2[i] << " ";
+    std::cout << "copy: ";
+    for (size_t index = 0; index < copy.size(); ++index)
+        std::cout << copy[index] << " ";
     
     std::cout << std::endl;
 
-    arr1[2] = 100;  // Modify arr1, arr2 should remain unaffected
+    first[2] = 100;  // 
 
-    std::cout << "After modifying arr1: " << std::endl;
-    std::cout << "arr1: ";
-    for (size_t i = 0; i < arr1.size(); ++i)
-        std::cout << arr1[i] << " ";
+    std::cout << "Modify first, copy should remain unaffected\n" 
+        << "After modifying first: \n"
+        << "first: " 
+        << std::endl;
+
+    for (size_t index = 0; index < first.size(); ++index)
+        std::cout << first[index] << " ";
     
     std::cout << std::endl;
 
-    std::cout << "arr2: ";
-    for (size_t i = 0; i < arr2.size(); ++i)
-        std::cout << arr2[i] << " ";
+    std::cout << "copy: ";
+    for (size_t index = 0; index < copy.size(); ++index)
+        std::cout << copy[index] << " ";
     
     std::cout << std::endl;
 
-    // Accessing out-of-bounds index
     try {
-        int value = arr1[10];  // Index 10 is out of bounds
+        int value = first[10];  
         std::cout << "Value at index 10: " << value << std::endl;
     } catch (const std::exception& ex) {
         std::cout << "Exception caught: Out-of-bounds access" << std::endl;

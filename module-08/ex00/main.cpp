@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 20:20:14 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/07 20:30:28 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:27:39 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ template <typename T>
 typename T::iterator easyfind(T& container, int value) {
     typename T::iterator it = std::find(container.begin(), container.end(), value);
     if (it == container.end()) {
-        throw (std::runtime_error("Element was not found!"));
+        throw (std::exception("Element was not found!"));
     }
     return it;
 }
@@ -32,21 +32,24 @@ int main() {
     try {
         int valueToFind = 30;
         std::vector<int>::iterator result = easyfind(vec, valueToFind);
-        if (result == vec.end()) {
-            std::cout << "Value " << valueToFind << " not found." << std::endl;
-        } else {
-            std::cout << "Value " << valueToFind << " found at index " << std::distance(vec.begin(), result) << std::endl;
-        }
+       
+        std::cout << "Value " << valueToFind;
+        if (result == vec.end())
+            std::cout << " not found." << std::endl;
+        else
+            std::cout << " found at index " << std::distance(vec.begin(), result) << std::endl;
 
         valueToFind = 60;
         result = easyfind(vec, valueToFind);
+        
+        std::cout << "Value " << valueToFind;
         if (result == vec.end()) {
-            std::cout << "Value " << valueToFind << " not found." << std::endl;
+            std::cout << " not found." << std::endl;
         } else {
-            std::cout << "Value " << valueToFind << " found at index " << std::distance(vec.begin(), result) << std::endl;
+            std::cout << " found at index " << std::distance(vec.begin(), result) << std::endl;
         }
-    } catch (...) {
-        std::cout << "An exception occurred." << std::endl;
+    } catch (const std::exception& ex) {
+        std::cout << ex.what() << std::endl;
     }
 
     return 0;
