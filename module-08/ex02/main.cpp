@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 05:58:54 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/21 10:36:30 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:57:52 by mnadir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,49 +15,49 @@
 #include "MutantStack.hpp"
 
 template <typename T>
-MutantStack<T>::iterator MutantStack<T>::begin()
+typename MutantStack<T>::iterator MutantStack<T>::begin()
 {
     return std::stack<T>::c.begin();
 }
 
 template <typename T>
-MutantStack<T>::iterator MutantStack<T>::end()
+typename MutantStack<T>::iterator MutantStack<T>::end()
 {
     return std::stack<T>::c.end();
 }
 
 template <typename T>
-MutantStack<T>::reverse_iterator MutantStack<T>::rbegin()
+typename MutantStack<T>::reverse_iterator MutantStack<T>::rbegin()
 { 
     return std::stack<T>::c.rbegin();
 }
 
 template <typename T>
-MutantStack<T>::reverse_iterator MutantStack<T>::rend()
+typename MutantStack<T>::reverse_iterator MutantStack<T>::rend()
 {
     return std::stack<T>::c.rend();
 }
 
 template <typename T>
-MutantStack<T>::const_iterator MutantStack<T>::cbegin() const 
+typename MutantStack<T>::const_iterator MutantStack<T>::cbegin() const 
 {
     return std::stack<T>::c.begin();
 }
 
 template <typename T>
-MutantStack<T>::const_iterator MutantStack<T>::cend() const
+typename MutantStack<T>::const_iterator MutantStack<T>::cend() const
 {
     return std::stack<T>::c.end();
 }
 
 template <typename T>
-MutantStack<T>::const_reverse_iterator MutantStack<T>::crbegin() const
+typename MutantStack<T>::const_reverse_iterator MutantStack<T>::crbegin() const
 {
     return std::stack<T>::c.rbegin();
 }
 
 template <typename T>
-MutantStack<T>::const_reverse_iterator MutantStack<T>::crend() const
+typename MutantStack<T>::const_reverse_iterator MutantStack<T>::crend() const
 {
     return std::stack<T>::c.rend();
 }

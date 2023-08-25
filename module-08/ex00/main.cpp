@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 20:20:14 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/21 10:27:39 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:45:22 by mnadir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ template <typename T>
 typename T::iterator easyfind(T& container, int value) {
     typename T::iterator it = std::find(container.begin(), container.end(), value);
     if (it == container.end()) {
-        throw (std::exception("Element was not found!"));
+        throw (std::runtime_error("Element was not found!"));
     }
     return it;
 }
