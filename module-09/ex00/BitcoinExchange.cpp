@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:02:12 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/25 18:25:31 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:36:35 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& instance)
 {
     if (this != &instance)
     {
-        std::map<unsigned int, double>::iterator start = instance.getPrices().begin();
+        std::map<unsigned int, double>::const_iterator start = instance.getPrices().begin();
         this->_prices.clear();
 
         while (start != instance.getPrices().end())
@@ -272,7 +272,7 @@ bool BitcoinExchange::isValidDate(int year, int month, int day) {
     return (day <= daysInCurrentMonth);
 }
 
-std::map<unsigned int, double> BitcoinExchange::getPrices() const
+const std::map<unsigned int, double>& BitcoinExchange::getPrices() const
 {
     return (_prices);
 }

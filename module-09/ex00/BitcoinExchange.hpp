@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:49:02 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/16 05:38:23 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:36:15 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ public:
 
     BitcoinExchange(std::string database);
 
-    std::map<unsigned int, double> getPrices() const;
+    const std::map<unsigned int, double>& getPrices() const;
 
     void    calculate(const std::string& file);
 };
