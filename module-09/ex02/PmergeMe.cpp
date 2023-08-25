@@ -48,17 +48,15 @@ PmergeMe::PmergeMe(int argc, char **argv)
     {
         if (strcmp(argv[index], " ") == 0)
             continue;
-        
+
         int j = -1;
         while (argv[index][++j])
         {
             if (!isdigit(argv[index][j]))
             {
-                std::cerr << "Error: Invalid argument '" 
+                std::cerr << "Error: Invalid argument '"
                     << argv[index]
-                    << " "
-                    << argv[index][j]
-                    << "'. 1 Only positive integers are allowed." 
+                    << "'. 1 Only positive integers are allowed."
                     << std::endl;
                 std::exit(EXIT_FAILURE);
             }
@@ -67,9 +65,9 @@ PmergeMe::PmergeMe(int argc, char **argv)
     for (int index = 1; index < argc; ++index) {
         int number = std::atoi(argv[index]);
         if (number < 0) {
-            std::cerr << "Error: Invalid argument '" 
-                << argv[index] 
-                << "'. Only positive integers are allowed." 
+            std::cerr << "Error: Invalid argument '"
+                << argv[index]
+                << "'. Only positive integers are allowed."
                 << std::endl;
             std::exit(EXIT_FAILURE);
         }
@@ -90,14 +88,14 @@ void    PmergeMe::sort(std::vector<int>& sequence, bool multiset)
 {
     if (sequence.size() < 2)
         return ;
-    
+
     typedef typename std::multiset< std::pair<int, int> > integerPairMultiset;
     typedef typename integerPairMultiset::iterator integerPairMultisetIterator;
 
     typedef typename std::priority_queue< std::pair<int, int>,
         std::vector< std::pair<int, int> >,
         std::greater< std::pair<int, int> > > integerAscendingPriorityQueue;
-    
+
     std::vector< std::pair<int, int> > pairs;
 
     for (size_t index = 0; index + 1 < sequence.size(); index += 2)
@@ -111,7 +109,7 @@ void    PmergeMe::sort(std::vector<int>& sequence, bool multiset)
     if (multiset)
     {
         integerPairMultiset redBlackTree(pairs.begin(), pairs.end());
-        
+
         pairs.clear();
 
         for (integerPairMultisetIterator it = redBlackTree.begin(); it != redBlackTree.end(); it++)
@@ -127,7 +125,7 @@ void    PmergeMe::sort(std::vector<int>& sequence, bool multiset)
          {
             pairs.push_back(minimumHeap.top());
             minimumHeap.pop();
-         } 
+         }
     }
 
     std::vector<int> result, pend;
@@ -152,7 +150,7 @@ void    PmergeMe::sort(std::vector<int>& sequence, bool multiset)
 
     for (size_t index = 0; index < result.size(); index++)
         sequence[index] = result[index];
-    
+
 }
 
 timeval PmergeMe::time()
@@ -185,21 +183,17 @@ void    PmergeMe::execute()
     sort(_sequence, false);
     timeval end_tree = time();
 
-    displaySequence("Before: ", copy);
-
     timeval start_minimum_heap = time();
     sort(copy, true);
     timeval end_minimum_heap = time();
 
     displaySequence("After: ", _sequence);
 
-    displaySequence("After: ", copy);
-    
-    displayTime("Time to process a range of " 
-        + intToString(_sequence.size()) 
-        + " elements with std::vector: ", start_tree, end_tree);
-    
-    displayTime("Time to process a range of " 
+    displayTime("Time to process a range of "
+        + intToString(_sequence.size())
+        + " elements with std::multiset ", start_tree, end_tree);
+
+    displayTime("Time to process a range of "
         + intToString(copy.size())
-        + " elements with std::deque: ", start_minimum_heap, end_minimum_heap);
+        + " elements with std::priority_queue ", start_minimum_heap, end_minimum_heap);
 }
