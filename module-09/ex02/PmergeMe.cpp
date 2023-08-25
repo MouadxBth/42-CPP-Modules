@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 01:50:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/16 05:47:46 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:02:34 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <algorithm>
 #include <sstream>
 #include <cstring>
+#include <set>
+#include <queue>
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe(){}
@@ -31,16 +33,11 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& instance)
 {
     if (this != &instance)
     {
-        _sequence_deque.clear();
-        _sequence_vector.clear();
+        _sequence.clear();
 
-        std::copy(instance._sequence_vector.begin(),
-            instance._sequence_vector.end(),
-            std::back_inserter(_sequence_vector));
-
-        std::copy(instance._sequence_deque.begin(),
-            instance._sequence_deque.end(),
-            std::back_inserter(_sequence_deque));
+        std::copy(instance._sequence.begin(),
+            instance._sequence.end(),
+            std::back_inserter(_sequence));
     }
     return (*this);
 }
@@ -58,8 +55,10 @@ PmergeMe::PmergeMe(int argc, char **argv)
             if (!isdigit(argv[index][j]))
             {
                 std::cerr << "Error: Invalid argument '" 
-                    << argv[index] 
-                    << "'. Only positive integers are allowed." 
+                    << argv[index]
+                    << " "
+                    << argv[index][j]
+                    << "'. 1 Only positive integers are allowed." 
                     << std::endl;
                 std::exit(EXIT_FAILURE);
             }
@@ -67,53 +66,105 @@ PmergeMe::PmergeMe(int argc, char **argv)
     }
     for (int index = 1; index < argc; ++index) {
         int number = std::atoi(argv[index]);
-        if (number <= 0) {
+        if (number < 0) {
             std::cerr << "Error: Invalid argument '" 
                 << argv[index] 
                 << "'. Only positive integers are allowed." 
                 << std::endl;
             std::exit(EXIT_FAILURE);
         }
-        _sequence_vector.push_back(number);
-        _sequence_deque.push_back(number);
+        _sequence.push_back(number);
     }
 }
 
-void    PmergeMe::execute()
-{
-    displaySequenceVector("Before: ", _sequence_vector);
-
-    clock_t start_vector = clock();
-    mergeInsertSortVector(_sequence_vector, 0, _sequence_vector.size() - 1);
-    clock_t end_vector = clock();
-
-    clock_t start_deque = clock();
-    mergeInsertSortDeque(_sequence_deque, 0, _sequence_deque.size() - 1);
-    clock_t end_deque = clock();
-
-    displaySequenceVector("After: ", _sequence_vector);
-    
-    displayTime("Time to process a range of " 
-        + intToString(_sequence_vector.size()) 
-        + " elements with std::vector: ", start_vector, end_vector);
-    
-    displayTime("Time to process a range of " 
-        + intToString(_sequence_deque.size())
-        + " elements with std::deque: ", start_deque, end_deque);
-}
-
-void PmergeMe::displaySequenceVector(const std::string& message, const std::vector<int>& sequence)
+void PmergeMe::displaySequence(const std::string& message, const std::vector<int>& sequence)
 {
     std::cout << message;
-    for (size_t i = 0; i < sequence.size(); ++i) {
-        std::cout << sequence[i] << " ";
+    for (size_t index = 0; index < sequence.size(); ++index) {
+        std::cout << sequence[index] << " ";
     }
     std::cout << std::endl;
 }
 
-void PmergeMe::displayTime(const std::string& message, clock_t start, clock_t end)
+void    PmergeMe::sort(std::vector<int>& sequence, bool multiset)
 {
-    double duration = static_cast<double>(end - start) * 1e6 / CLOCKS_PER_SEC;
+    if (sequence.size() < 2)
+        return ;
+    
+    typedef typename std::multiset< std::pair<int, int> > integerPairMultiset;
+    typedef typename integerPairMultiset::iterator integerPairMultisetIterator;
+
+    typedef typename std::priority_queue< std::pair<int, int>,
+        std::vector< std::pair<int, int> >,
+        std::greater< std::pair<int, int> > > integerAscendingPriorityQueue;
+    
+    std::vector< std::pair<int, int> > pairs;
+
+    for (size_t index = 0; index + 1 < sequence.size(); index += 2)
+    {
+        pairs.push_back(std::make_pair(
+            std::max(sequence[index], sequence[index + 1]),
+            std::min(sequence[index], sequence[index + 1])
+        ));
+    }
+
+    if (multiset)
+    {
+        integerPairMultiset redBlackTree(pairs.begin(), pairs.end());
+        
+        pairs.clear();
+
+        for (integerPairMultisetIterator it = redBlackTree.begin(); it != redBlackTree.end(); it++)
+            pairs.push_back(*it);
+    }
+    else
+    {
+         integerAscendingPriorityQueue minimumHeap(pairs.begin(), pairs.end());
+
+         pairs.clear();
+
+         while (!minimumHeap.empty())
+         {
+            pairs.push_back(minimumHeap.top());
+            minimumHeap.pop();
+         } 
+    }
+
+    std::vector<int> result, pend;
+
+    result.push_back(pairs[0].second);
+
+    for (std::vector< std::pair<int, int> >::iterator it = pairs.begin();
+        it != pairs.end();
+        it++)
+    {
+        result.push_back(it->first);
+        pend.push_back(it->second);
+    }
+
+    if (sequence.size() % 2)
+        pend.push_back(sequence[sequence.size() - 1]);
+
+     for (size_t index = 1; index < pend.size(); index++) {
+        std::vector<int>::iterator position = std::upper_bound(result.begin(), result.end(), pend[index]);
+        result.insert(position, pend[index]);
+    }
+
+    for (size_t index = 0; index < result.size(); index++)
+        sequence[index] = result[index];
+    
+}
+
+timeval PmergeMe::time()
+{
+    timeval	now;
+	gettimeofday(&now, NULL);
+    return (now);
+}
+
+void PmergeMe::displayTime(const std::string& message, timeval start, timeval end)
+{
+    unsigned long long duration = (end.tv_sec * 1e6 + end.tv_usec) - (start.tv_sec * 1e6 + start.tv_usec);
     std::cout << message << duration << " us" << std::endl;
 }
 
@@ -124,104 +175,31 @@ std::string PmergeMe::intToString(int num)
     return ss.str();
 }
 
-void PmergeMe::insertSortVector(std::vector<int>& sequence, int left, int right)
+void    PmergeMe::execute()
 {
-    for (int index = left, secondIndex = index + 1, currentValue = sequence[secondIndex];
-        index < right;
-        index++, secondIndex = index + 1, currentValue = sequence[secondIndex]) {
+    std::vector<int> copy(_sequence);
 
-        while (secondIndex > left && sequence[secondIndex - 1] > currentValue) {
-            sequence[secondIndex] = sequence[secondIndex - 1];
-            secondIndex--;
-        }
-        sequence[secondIndex] = currentValue;
-    }
-}
+    displaySequence("Before: ", _sequence);
 
-void PmergeMe::mergeVector(std::vector<int>& sequence, int left, int middle, int right)
-{
-    int leftVectorStart = middle - left + 1;
-    int rightVectorStart = right - middle;
+    timeval start_tree = time();
+    sort(_sequence, false);
+    timeval end_tree = time();
 
-    std::vector<int> leftVector(sequence.begin() + left, sequence.begin() + middle + 1);
-    std::vector<int> rightVector(sequence.begin() + middle + 1, sequence.begin() + right + 1);
+    displaySequence("Before: ", copy);
 
-    int index = 0, secondIndex = 0, current = left;
+    timeval start_minimum_heap = time();
+    sort(copy, true);
+    timeval end_minimum_heap = time();
+
+    displaySequence("After: ", _sequence);
+
+    displaySequence("After: ", copy);
     
-    while (index < leftVectorStart && secondIndex < rightVectorStart)
-        sequence[current++] = (leftVector[index] <= rightVector[secondIndex]) ?
-            leftVector[index++] : rightVector[secondIndex++];
-
-    while (index < leftVectorStart)
-        sequence[current++] = leftVector[index++];
-
-    while (secondIndex < rightVectorStart)
-        sequence[current++] = rightVector[secondIndex++];
-}
-
-void PmergeMe::mergeInsertSortVector(std::vector<int>& sequence, int left, int right)
-{
-    if (right - left > 20)
-    {
-        int middle = left + (right - left) / 2;
-
-        mergeInsertSortVector(sequence, left, middle);
-        mergeInsertSortVector(sequence, middle + 1, right);
-
-        mergeVector(sequence, left, middle, right);
-    }
-    else
-    {
-        insertSortVector(sequence, left, right);
-    }
-}
-
-void PmergeMe::insertSortDeque(std::deque<int>& sequence, int left, int right) {
-    for (int index = left, secondIndex = index + 1, currentValue = sequence[secondIndex];
-        index < right;
-        index++, secondIndex = index + 1, currentValue = sequence[secondIndex]) {
-
-        while (secondIndex > left && sequence[secondIndex - 1] > currentValue) {
-            sequence[secondIndex] = sequence[secondIndex - 1];
-            secondIndex--;
-        }
-        sequence[secondIndex] = currentValue;
-    }
-}
-
-void PmergeMe::mergeDeque(std::deque<int>& sequence, int left, int middle, int right) {
-    int leftDequeStart = middle - left + 1;
-    int rightDequeStart = right - middle;
-
-    std::deque<int> leftVector(sequence.begin() + left, sequence.begin() + middle + 1);
-    std::deque<int> rightVector(sequence.begin() + middle + 1, sequence.begin() + right + 1);
-
-    int index = 0, secondIndex = 0, current = left;
+    displayTime("Time to process a range of " 
+        + intToString(_sequence.size()) 
+        + " elements with std::vector: ", start_tree, end_tree);
     
-    while (index < leftDequeStart && secondIndex < rightDequeStart)
-        sequence[current++] = (leftVector[index] <= rightVector[secondIndex]) ?
-            leftVector[index++] : rightVector[secondIndex++];
-
-    while (index < leftDequeStart)
-        sequence[current++] = leftVector[index++];
-
-    while (secondIndex < rightDequeStart)
-        sequence[current++] = rightVector[secondIndex++];
-}
-
-void PmergeMe::mergeInsertSortDeque(std::deque<int>& sequence, int left, int right)
-{
-    if (right - left > 20)
-    {
-        int middle = left + (right - left) / 2;
-
-        mergeInsertSortDeque(sequence, left, middle);
-        mergeInsertSortDeque(sequence, middle + 1, right);
-
-        mergeDeque(sequence, left, middle, right);
-    }
-    else
-    {
-        insertSortDeque(sequence, left, right);
-    }
+    displayTime("Time to process a range of " 
+        + intToString(copy.size())
+        + " elements with std::deque: ", start_minimum_heap, end_minimum_heap);
 }

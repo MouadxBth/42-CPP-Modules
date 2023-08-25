@@ -6,32 +6,32 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 01:46:15 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/16 04:09:38 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:48:14 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string>
+#include <iostream>
 #include <vector>
-#include <deque>
+#include <algorithm>
+#include <climits>
+#include <set>
+#include <sys/time.h>
+#include <queue>
 
 class PmergeMe
 {
 
 private:
-    std::vector<int>    _sequence_vector;
-    std::deque<int>     _sequence_deque;
-    
-    void    displaySequenceVector(const std::string& message, const std::vector<int>& sequence);
-    void    displaySequenceDeque(const std::string& message, const std::deque<int>& sequence);
-    void    displayTime(const std::string& message, clock_t start, clock_t end);
+    std::vector<int>    _sequence;
+
     std::string     intToString(int num);
 
-    void    insertSortVector(std::vector<int>& sequence, int left, int right);
-    void    mergeVector(std::vector<int>& sequence, int left, int middle, int right);
-    void    mergeInsertSortVector(std::vector<int>& sequence, int left, int right);
+    timeval time();
 
-    void    insertSortDeque(std::deque<int>& sequence, int left, int right);
-    void    mergeDeque(std::deque<int>& sequence, int left, int middle, int right);
-    void    mergeInsertSortDeque(std::deque<int>& sequence, int left, int right);
+    void    displayTime(const std::string& message, timeval start, timeval end);
+
+    void    displaySequence(const std::string& message, const std::vector<int>& sequence);
 
 public:
     PmergeMe();
@@ -41,6 +41,8 @@ public:
 
     PmergeMe(int argc, char **argv);
     
+    void    sort(std::vector<int>& sequence, bool multiset);
+
     void    execute();
 
 };
