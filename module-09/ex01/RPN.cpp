@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 01:13:11 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/25 18:41:46 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:41:10 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,17 @@ bool    RPN::isOperator(const std::string& token) {
     return token == "+" || token == "-" || token == "*" || token == "/";
 }
 
-int     RPN::performOperation(const std::string& operation, int first, int second)
+int     RPN::performOperation(const std::string& operation, int first, int second) throw(std::runtime_error)
 {
     if (operation == "+") return first + second;
     if (operation == "-") return first - second;
     if (operation == "*") return first * second;
-    if (operation == "/") return first / second;
+    if (operation == "/")
+    {
+        if (!second)
+            throw (std::runtime_error("Error! cannot divide by 0."));
+        return first / second;
+    }
     return 0; // This should not happen if input is valid
 }
 
@@ -88,8 +93,17 @@ int    RPN::evaluate(const std::string& expression)
             int first = _operands.top();
             _operands.pop();
            
-            int result = performOperation(token, first, second);
-            _operands.push(result);
+            try
+            {
+                int result = performOperation(token, first, second);
+                _operands.push(result);
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << std::endl;
+                return (-1);
+            }
+            
         }
         else
             return (std::cout << "Error: Invalid token: " << token << std::endl, -1);
