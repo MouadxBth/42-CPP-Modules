@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 01:13:11 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/16 05:37:53 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:41:46 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,26 @@ int    RPN::evaluate(const std::string& expression)
     std::stringstream ss(expression);
     std::string token;
 
+    for (size_t index = 0; index < expression.size(); index++)
+    {
+        if (!(expression[index] == ' '
+            || expression[index] == '*'
+            || expression[index] == '/'
+            || expression[index] == '-'
+            || expression[index] == '+'
+            || isdigit(expression[index])))
+            return (std::cout << "Error: Invalid arguments!" << std::endl, -1);
+    }
+
     while (ss >> token)
     {
         if (isdigit(token[0]))
-            _operands.push(atoi(token.c_str()));
+        {
+            int value = atoi(token.c_str());
+            if (value < 0 || value > 9)
+                return (std::cout << "Error: Invalid arguments!" << std::endl, -1);
+            _operands.push(value);
+        }
         else if (isOperator(token))
         {
             if (_operands.size() < 2)
