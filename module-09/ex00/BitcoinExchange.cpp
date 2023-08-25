@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:02:12 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/20 19:40:38 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:25:31 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ bool BitcoinExchange::extractDateComponents(const std::string& date, int& year, 
 }
 
 bool BitcoinExchange::isValidDate(int year, int month, int day) {
-    if (year < 0 || month < 1 || month > 12 || day < 1)
+    if (year < 1 || month < 1 || month > 12 || day < 1)
         return (false);
 
     static const int daysInMonth[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
