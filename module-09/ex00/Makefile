@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 23:26:34 by mbouthai          #+#    #+#              #
-#    Updated: 2023/08/16 05:50:15 by mbouthai         ###   ########.fr        #
+#    Updated: 2023/08/27 18:47:51 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,9 +54,9 @@ endef
 
 CXX	:= c++
 
-CPPFLAGS	:= -Wall -Werror -Wextra -std=c++98 -I$(HEADERS_DIR)/#-Wshadow
+CPPFLAGS	:= -Wall -Werror -Wextra -std=c++98 -I$(HEADERS_DIR)/ #-fsanitize=address #-Wshadow
 
-LDFLAGS	:= -fsanitize=address
+LDFLAGS	:= #-fsanitize=address
 
 CLEAN_DIR	:= rm -fd
 

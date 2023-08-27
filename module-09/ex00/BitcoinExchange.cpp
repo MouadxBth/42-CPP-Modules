@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:02:12 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/26 00:36:35 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:46:18 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void    BitcoinExchange::calculate(const std::string& fileName)
     int year, month, day;
     double currentValue;
     std::istringstream lineStream;
-    std::map<unsigned int, double>::iterator it;
+    std::map<unsigned int, double>::iterator it, foundElement;
 
     while (std::getline(file, line))
     {
@@ -223,7 +223,9 @@ void    BitcoinExchange::calculate(const std::string& fileName)
         else
             std::cout << day;
         std::cout << " => "
-            << currentValue * (it != this->_prices.begin() ? (--it)->second : it->second)
+            << currentValue 
+            << " = "
+            << currentValue * (it == _prices.begin() ? it->second : (--it)->second)
             << std::endl;
     }    
 }
