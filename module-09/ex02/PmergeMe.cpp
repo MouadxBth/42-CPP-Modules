@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 01:50:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/25 18:02:34 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/27 04:08:36 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,78 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& instance)
     return (*this);
 }
 
-PmergeMe::PmergeMe(int argc, char **argv)
-{
-    for (int index = 1; index < argc; index++)
-    {
-        if (strcmp(argv[index], " ") == 0)
-            continue;
+static void parseNumbers(std::vector<int>& numbers, const std::string& input) {
+    std::istringstream iss(input);
+    std::string token;
+    int value;
 
-        int j = -1;
-        while (argv[index][++j])
-        {
-            if (!isdigit(argv[index][j]))
-            {
-                std::cerr << "Error: Invalid argument '"
-                    << argv[index]
-                    << "'. 1 Only positive integers are allowed."
-                    << std::endl;
-                std::exit(EXIT_FAILURE);
+    while (iss >> token) {
+        bool valid = true;
+        bool hasSign = false;
+
+        for (size_t i = 0; i < token.size(); ++i) {
+            if (i == 0 && (token[i] == '+' || token[i] == '-')) {
+                hasSign = true;
+                continue;
             }
+            if (!std::isdigit(token[i])) {
+                valid = false;
+                break;
+            }
+            if (hasSign)
+                hasSign = false;
         }
-    }
-    for (int index = 1; index < argc; ++index) {
-        int number = std::atoi(argv[index]);
-        if (number < 0) {
+
+        if (!valid || hasSign) {
             std::cerr << "Error: Invalid argument '"
-                << argv[index]
+                << token
                 << "'. Only positive integers are allowed."
                 << std::endl;
             std::exit(EXIT_FAILURE);
         }
-        _sequence.push_back(number);
+        value = std::atoi(token.c_str());
+        if (value < 0)
+        {
+            std::cerr << "Error: Invalid argument '"
+                << token
+                << "'. Only positive integers are allowed."
+                << std::endl;
+            std::exit(EXIT_FAILURE);
+        }
+        numbers.push_back(value);
     }
+}
+
+static void    checkArgument(std::string& arg)
+{
+    for (size_t index = 0; index < arg.size(); index++)
+    {
+        if (!std::isspace(arg[index]) 
+            && arg[index] != '+'
+            && !std::isdigit(arg[index]))
+        {
+            std::cerr << "Error: Invalid argument '"
+                    << arg
+                    << "'. Only positive integers are allowed."
+                    << std::endl;
+                std::exit(EXIT_FAILURE);
+        }
+    }
+}
+
+PmergeMe::PmergeMe(int argc, char **argv)
+{
+    std::string currentArgument;
+
+    for (int index = 1; index < argc; index++)
+    {
+        currentArgument = argv[index];
+        if (currentArgument.empty())
+            continue;
+        checkArgument(currentArgument);
+        parseNumbers(_sequence, currentArgument);
+    }
+
 }
 
 void PmergeMe::displaySequence(const std::string& message, const std::vector<int>& sequence)
@@ -162,8 +203,10 @@ timeval PmergeMe::time()
 
 void PmergeMe::displayTime(const std::string& message, timeval start, timeval end)
 {
-    unsigned long long duration = (end.tv_sec * 1e6 + end.tv_usec) - (start.tv_sec * 1e6 + start.tv_usec);
-    std::cout << message << duration << " us" << std::endl;
+    std::cout << message 
+        << (end.tv_sec * 1e6 + end.tv_usec) - (start.tv_sec * 1e6 + start.tv_usec) 
+        << " us" 
+        << std::endl;
 }
 
 std::string PmergeMe::intToString(int num)
@@ -175,6 +218,8 @@ std::string PmergeMe::intToString(int num)
 
 void    PmergeMe::execute()
 {
+    if (_sequence.empty())
+        return ;
     std::vector<int> copy(_sequence);
 
     displaySequence("Before: ", _sequence);
@@ -191,9 +236,9 @@ void    PmergeMe::execute()
 
     displayTime("Time to process a range of "
         + intToString(_sequence.size())
-        + " elements with std::multiset ", start_tree, end_tree);
+        + " elements with std::priority_queue ", start_tree, end_tree);
 
     displayTime("Time to process a range of "
         + intToString(copy.size())
-        + " elements with std::priority_queue ", start_minimum_heap, end_minimum_heap);
+        + " elements with std::multiset ", start_minimum_heap, end_minimum_heap);
 }
