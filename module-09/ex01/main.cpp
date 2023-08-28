@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 01:25:50 by mbouthai          #+#    #+#             */
-/*   Updated: 2023/08/14 01:26:51 by mbouthai         ###   ########.fr       */
+/*   Updated: 2023/08/28 02:35:14 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ int main(int argc, char** argv) {
         std::cout << "Usage: " << argv[0] << " <RPN_expression>" << std::endl;
         return 1;
     }
-
-    int result = rpn.evaluate(argv[1]);
-    if (result != -1) {
-        std::cout << result << std::endl;
-    }
+    
+    rpn.evaluate(argv[1]);
 
     return 0;
 }
